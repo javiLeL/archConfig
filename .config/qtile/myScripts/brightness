@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#   ▄▄▄██▀▀▀ ▄▄▄       ██▒   █▓ ██▓      ██▓    ▓█████  ██▓    
+#     ▒██   ▒████▄    ▓██░   █▒▓██▒     ▓██▒    ▓█   ▀ ▓██▒    
+#     ░██   ▒██  ▀█▄   ▓██  █▒░▒██▒     ▒██░    ▒███   ▒██░    
+#  ▓██▄██▓  ░██▄▄▄▄██   ▒██ █░░░██░     ▒██░    ▒▓█  ▄ ▒██░    
+#   ▓███▒    ▓█   ▓██▒   ▒▀█░  ░██░ ██▓ ░██████▒░▒████▒░██████▒
+#   ▒▓▒▒░    ▒▒   ▓▒█░   ░ ▐░  ░▓   ▒▓▒ ░ ▒░▓  ░░░ ▒░ ░░ ▒░▓  ░
+#   ▒ ░▒░     ▒   ▒▒ ░   ░ ░░   ▒ ░ ░▒  ░ ░ ▒  ░ ░ ░  ░░ ░ ▒  ░
+#   ░ ░ ░     ░   ▒        ░░   ▒ ░ ░     ░ ░      ░     ░ ░   
+#   ░   ░         ░  ░      ░   ░    ░      ░  ░   ░  ░    ░  ░
+#                          ░         ░                         
+
+case $1 in
+up)
+	brightnessctl s +5%
+	;;
+down)
+	brightnessctl s 5%-
+esac
+
+porcent=$(($(brightnessctl g)*100/$(brightnessctl m)))
+icon=(󰃞 󰃝 󰃟 󰃠)
+iconNum=0
+
+if [ $porcent = 0 ]; then
+	iconNum=0
+elif [ $porcent -gt 0 ] && [ $porcent -le 40 ]; then
+	iconNum=1
+elif [ $porcent -gt 40 ] && [ $porcent -le 70 ]; then
+	iconNum=2
+elif [ $porcent -gt 70 ] && [ $porcent -le 100 ]; then
+	iconNum=3
+fi
+dunstify "${icon[$iconNum]} Brightnes = $porcent" -a some_volume_notifiers -t 1000 -h int:value:$porcent -h string:synchronous:'$bar' --replace=555

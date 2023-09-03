@@ -1,0 +1,49 @@
+#!/bin/bash
+
+#   ▄▄▄██▀▀▀ ▄▄▄       ██▒   █▓ ██▓      ██▓    ▓█████  ██▓    
+#     ▒██   ▒████▄    ▓██░   █▒▓██▒     ▓██▒    ▓█   ▀ ▓██▒    
+#     ░██   ▒██  ▀█▄   ▓██  █▒░▒██▒     ▒██░    ▒███   ▒██░    
+#  ▓██▄██▓  ░██▄▄▄▄██   ▒██ █░░░██░     ▒██░    ▒▓█  ▄ ▒██░    
+#   ▓███▒    ▓█   ▓██▒   ▒▀█░  ░██░ ██▓ ░██████▒░▒████▒░██████▒
+#   ▒▓▒▒░    ▒▒   ▓▒█░   ░ ▐░  ░▓   ▒▓▒ ░ ▒░▓  ░░░ ▒░ ░░ ▒░▓  ░
+#   ▒ ░▒░     ▒   ▒▒ ░   ░ ░░   ▒ ░ ░▒  ░ ░ ▒  ░ ░ ░  ░░ ░ ▒  ░
+#   ░ ░ ░     ░   ▒        ░░   ▒ ░ ░     ░ ░      ░     ░ ░   
+#   ░   ░         ░  ░      ░   ░    ░      ░  ░   ░  ░    ░  ░
+#                          ░         ░                         
+
+case $1 in
+up)
+	pamixer -i 5
+	;;
+down)
+	pamixer -d 5
+	;;
+mute)
+	pamixer -t
+esac
+
+volume=$(pamixer --get-volume)
+isMute=$(pamixer --get-mute)
+icon=("volumeMute"
+      "volumeOff"
+      "volumenLow" 
+      "volumeMedium"
+      "volumeHigh")
+
+
+if [ "$isMute" = "true" ]; then
+	dunstify -i ${icon[0]} -a some_volume_notifiers -t 1000 "Mute ![$volume]" -h int:value:$volume -h string:synchronous:'$bar' --replace=555
+else
+	iconNum=0;
+	if [ $volume = 0 ]; then
+		iconNum=1
+	elif [ $volume -gt 0 ] && [ $volume -le 10 ]; then
+		iconNum=2
+	elif [ $volume -gt 10 ] && [ $volume -le 50 ]; then
+		iconNum=3
+	elif [ $volume -gt 50 ] && [ $volume -le 100 ]; then
+		iconNum=4
+	fi
+
+	dunstify -i ${icon[$iconNum]} "Volume = $volume" -a some_volume_notifiers -t 1000 -h int:value:$volume -h string:synchronous:'$bar' --replace=555
+fi

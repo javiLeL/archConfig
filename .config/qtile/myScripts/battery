@@ -1,0 +1,57 @@
+#!/bin/bash
+
+#   ▄▄▄██▀▀▀ ▄▄▄       ██▒   █▓ ██▓      ██▓    ▓█████  ██▓    
+#     ▒██   ▒████▄    ▓██░   █▒▓██▒     ▓██▒    ▓█   ▀ ▓██▒    
+#     ░██   ▒██  ▀█▄   ▓██  █▒░▒██▒     ▒██░    ▒███   ▒██░    
+#  ▓██▄██▓  ░██▄▄▄▄██   ▒██ █░░░██░     ▒██░    ▒▓█  ▄ ▒██░    
+#   ▓███▒    ▓█   ▓██▒   ▒▀█░  ░██░ ██▓ ░██████▒░▒████▒░██████▒
+#   ▒▓▒▒░    ▒▒   ▓▒█░   ░ ▐░  ░▓   ▒▓▒ ░ ▒░▓  ░░░ ▒░ ░░ ▒░▓  ░
+#   ▒ ░▒░     ▒   ▒▒ ░   ░ ░░   ▒ ░ ░▒  ░ ░ ▒  ░ ░ ░  ░░ ░ ▒  ░
+#   ░ ░ ░     ░   ▒        ░░   ▒ ░ ░     ░ ░      ░     ░ ░   
+#   ░   ░         ░  ░      ░   ░    ░      ░  ░   ░  ░    ░  ░
+#                          ░         ░                         
+
+# Set DISPLAY
+export DISPLAY=:0
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
+
+# Battery percentage at which to notify
+WARNING_LEVEL=20
+MAX_LEVEL=75
+
+# use file of configuration
+DATAFILE=~/.config/qtile/myScripts/actual.data
+
+BATTERY_DISCHARGING=$(acpi -b | grep "Battery 0" | grep -c "Discharging")
+BATTERY_LEVEL=$(acpi -b | grep "Battery 0" | grep -P -o '[0-9]+(?=%)')
+
+OLDMODE=$(cat $DATAFILE | grep StateOfBattery | sed 's/StateOfBattery=//')
+NEWMODE=$OLDMODE
+
+if [ "$BATTERY_DISCHARGING" -eq 1 ];then
+    if [ "$OLDMODE" = "full" ]; then
+	notify-send -i batterydischarging -a some_battery_notifiers "Battery Discharging" "Battery is discharging." -r 9991
+    	sed -i 's/full/discharging/' $DATAFILE
+    elif [ "$OLDMODE" = "charging" ];then
+	notify-send -i batterydischarging -a some_battery_notifiers  "Battery Discharging" "Battery is discharging." -r 9991
+    	sed -i 's/charging/discharging/' $DATAFILE
+    fi
+    OLDMODE=$(cat $DATAFILE | grep StateOfBattery | sed 's/StateOfBattery=//')
+    if [ "$OLDMODE" = "discharging" ] && [ "$BATTERY_LEVEL" -le "$WARNING_LEVEL" ];then
+	notify-send -i batterylow -a some_battery_notifiers "Low Battery" "${BATTERY_LEVEL}% of battery remaining." -u critical -r 9991
+	sed -i 's/discharging/low/' $DATAFILE
+    fi
+elif [ "$BATTERY_DISCHARGING" -eq 0 ];then
+    if [ "$OLDMODE" = "discharging" ];then
+	notify-send -i batterycharging -a some_battery_notifiers "Battery Charging" "Battery is charging." -r 9991
+	sed -i 's/discharging/charging/' $DATAFILE
+    elif [ "$OLDMODE" = "low" ]; then
+	notify-send -i batterycharging -a some_battery_notifiers "Battery Charging" "Battery is charging." -r 9991
+	sed -i 's/low/charging/' $DATAFILE
+    fi
+    OLDMODE=$(cat $DATAFILE | grep StateOfBattery | sed 's/StateOfBattery=//')
+    if [ "$OLDMODE" = "charging" ] && [ "$BATTERY_LEVEL" -ge "$MAX_LEVEL" ]; then
+	notify-send -i batteryfull -a some_battery_notifiers "Battery Charged" "Battery is fully charged." -r 9991
+	sed -i 's/charging/full/' $DATAFILE
+    fi
+fi

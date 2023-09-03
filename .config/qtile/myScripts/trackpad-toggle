@@ -1,0 +1,36 @@
+#!/bin/bash
+
+#   ▄▄▄██▀▀▀ ▄▄▄       ██▒   █▓ ██▓      ██▓    ▓█████  ██▓    
+#     ▒██   ▒████▄    ▓██░   █▒▓██▒     ▓██▒    ▓█   ▀ ▓██▒    
+#     ░██   ▒██  ▀█▄   ▓██  █▒░▒██▒     ▒██░    ▒███   ▒██░    
+#  ▓██▄██▓  ░██▄▄▄▄██   ▒██ █░░░██░     ▒██░    ▒▓█  ▄ ▒██░    
+#   ▓███▒    ▓█   ▓██▒   ▒▀█░  ░██░ ██▓ ░██████▒░▒████▒░██████▒
+#   ▒▓▒▒░    ▒▒   ▓▒█░   ░ ▐░  ░▓   ▒▓▒ ░ ▒░▓  ░░░ ▒░ ░░ ▒░▓  ░
+#   ▒ ░▒░     ▒   ▒▒ ░   ░ ░░   ▒ ░ ░▒  ░ ░ ▒  ░ ░ ░  ░░ ░ ▒  ░
+#   ░ ░ ░     ░   ▒        ░░   ▒ ░ ░     ░ ░      ░     ░ ░   
+#   ░   ░         ░  ░      ░   ░    ░      ░  ░   ░  ░    ░  ░
+#                          ░         ░                         
+
+# Toogle touchpad on - off
+# synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')
+
+DATAFILE=~/.config/qtile/myScripts/actual.data
+
+OLDMODE=$(cat $DATAFILE | grep StateOfTrakpad | sed 's/StateOfTrakpad=//')
+
+NEWMODE=$(( ($OLDMODE+1)%2 ))
+
+if [ "$1" = "rest" ];then
+    NEWMODE=$OLDMODE
+else
+    # Send notification
+    if [ "$NEWMODE" = "0" ]; then
+        dunstify -i trackpadOn -a some_trackpad_notifiers -t 1000 "Touchpad = ON" --replace=555
+    else
+        dunstify -i trackpadOff -a some_trackpad_notifiers -t 1000 "Touchpad = OFF" --replace=555
+    fi
+    echo $NEWMODE
+    sed -i "s/$OLDMODE/$NEWMODE/" $DATAFILE
+fi
+
+synclient TouchpadOff=$NEWMODE
