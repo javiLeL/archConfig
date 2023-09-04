@@ -1,4 +1,3 @@
-# Arch config 󰣇
 ## Dependences
 - Qtile
   - Qtile-extras
