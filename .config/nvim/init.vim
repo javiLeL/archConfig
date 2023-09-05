@@ -24,3 +24,4 @@ so ~/.config/nvim/lens.vim
 so ~/.config/nvim/cocCfg.vim
 so ~/.config/nvim/binds.vim
 so ~/.config/nvim/lualineCfg.vim
+so ~/.config/nvim/dashboard.vim

@@ -14,7 +14,7 @@ Plug 'preservim/nerdtree'
 Plug 'nvim-lualine/lualine.nvim'
 
 " If you want to have icons in your statusline choose one of these
-" Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'
 
