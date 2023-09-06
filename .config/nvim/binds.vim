@@ -26,6 +26,12 @@ map <C-Q> :bdelete<CR>
 
 " Toggle on/off nerd tree
 map <C-T> :NERDTreeToggle .<CR>
+
+" Ranger
 nnoremap <M-t> :RnvimrToggle<CR>
+
+" Dashboard
+map <C-H> :Dashboard<CR>
+
 " noremap <leader>o :Lexplore<CR>
 "
