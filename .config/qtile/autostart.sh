@@ -12,7 +12,7 @@ synclient TapButton1=1 &
 
 # desactiva bluetooth
 bluetoothctl power off &
-# xrandr --output eDP1 --mode 1920x1080 --rate 60 
 
-# auto felititation
-# ~/Document/happybirday.sh
+# Set 60Hz
+# sleep 1000
+# xrandr --output eDP1 --mode 1920x1080 --rate 60 & 

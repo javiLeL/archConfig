@@ -2,6 +2,7 @@ let g:mapleader = ' '  " Definir espacio como la tecla líder
 
 " Ctrl+y to copy in clip board
 map <C-Y> "+y<CR>
+map <C-C> "+y<CR>
 
 " Ctrl+x to cut
 map <C-X> "+d<CR>
@@ -32,6 +33,3 @@ nnoremap <M-t> :RnvimrToggle<CR>
 
 " Dashboard
 map <C-H> :Dashboard<CR>
-
-" noremap <leader>o :Lexplore<CR>
-"

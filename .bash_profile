@@ -3,7 +3,7 @@
 #
 
 if [[ "$(tty)"="/dev/tty1" ]]; then
-	startx "$HOME/.xinitrc"
+    startx "$HOME/.xinitrc"
 fi
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
