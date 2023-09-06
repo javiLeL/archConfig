@@ -16,7 +16,6 @@ Plug 'nvim-lualine/lualine.nvim'
 " If you want to have icons in your statusline choose one of these
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'camspiers/animate.vim'
-Plug 'camspiers/lens.vim'
 
 " Superior tables
 Plug 'ap/vim-buftabline'
@@ -26,12 +25,16 @@ Plug 'ryanoasis/vim-devicons'
 
 " Ranger
 Plug 'kevinhwang91/rnvimr'
-" Plug 'francoiscabrol/ranger.vim'
-" Plug 'rbgrouleff/bclose.vim'
 
+" Dashboard
 Plug 'glepnir/dashboard-nvim'
-call plug#end() 
 
+" telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
+
+call plug#end() 
+set hidden
 " colorscheme tokyonight-moon
 colorscheme nightfly
 " colorscheme vim-monokai-tasty

@@ -23,3 +23,6 @@ set spelllang=en,es  " Corregir palabras usando diccionarios en inglés y españ
 resize -N 50
 let g:rnvimr_enable_picker = 1
 let g:rnvimr_shadow_winblend = 100
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\.gitignore$', '\.git$'] " ignore files in nerd tree
+let g:NERDTreeChDirMode = 2
