@@ -87,7 +87,6 @@ keys = [
     # Brigthnes
     # Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%"), desc="More brightnes"),
     # Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-"), desc="Less brightnes"),
-
     Key([], "XF86MonBrightnessUp", lazy.spawn(homefolder+"/.config/qtile/myScripts/brightness up"), desc="More brightnes"),
     Key([], "XF86MonBrightnessDown", lazy.spawn(homefolder+"/.config/qtile/myScripts/brightness down"), desc="Less brightnes"),
     Key([mod], "F6", lazy.spawn("brightnessctl set 0"), desc="Null brightnes"),

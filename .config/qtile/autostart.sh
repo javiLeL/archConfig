@@ -14,5 +14,5 @@ synclient TapButton1=1 &
 bluetoothctl power off &
 
 # Set 60Hz
-# sleep 1000
-# xrandr --output eDP1 --mode 1920x1080 --rate 60 & 
+sleep 1
+xrandr --output eDP1 --mode 1920x1080 --rate 60 & 
