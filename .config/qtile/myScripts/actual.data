@@ -11,8 +11,8 @@
 #   ░   ░         ░  ░      ░   ░    ░      ░  ░   ░  ░    ░  ░
 #                          ░         ░                         
 
-# State of battery low - discharging - discharging - full
-StateOfBattery=discharging
+# State of battery low - full - discharging - full
+StateOfBattery=full
 
 # Trakpad
-StateOfTrakpad=0
+StateOfTrakpad=1
