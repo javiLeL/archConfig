@@ -1,7 +1,8 @@
 [Desktop Entry]
 Name=NetworkManager
+StartupWMClass=networkmanager
 Comment=Network interface
 GenericName=NetworkManager
 Type=Application
 Icon=NetworkManager
-Exec=/usr/bin/alacritty -e /usr/bin/nmtui
+Exec=/usr/bin/alacritty -e nmtui
