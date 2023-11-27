@@ -20,7 +20,7 @@
 - Picom (Transparence)
 - Pqiv (Imagen Viewer)
 - Ranger (File browser)
-  - [Ranger_devicons](https://github.com/alexanderjeurissen/ranger_devicons)
+  - Ranger_devicons
 - Rofi (Application table)
 - Synclient (Trackpad manager)
 
