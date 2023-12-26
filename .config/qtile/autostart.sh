@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # fondo panatlla
-nitrogen --restore &
+# nitrogen --restore &
+nitrogen --set-zoom-fill --random ~/Pictures/backgrounds/ --head=0 > /dev/null
 
 # transparencias
 picom &
@@ -15,4 +16,4 @@ bluetoothctl power off &
 
 # Set 60Hz
 sleep 1
-xrandr --output eDP1 --mode 1920x1080 --rate 60 & 
+xrandr --output eDP-1 --mode 1920x1080 --rate 60 & 
