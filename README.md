@@ -29,3 +29,6 @@
 [Synclient](https://wiki.archlinux.org/title/Touchpad_Synaptics)
 [Nvim](https://github.com/javiLeL/My-nvim-configuration)
 [Ranger_devicons](https://github.com/alexanderjeurissen/ranger_devicons)
+
+## Interestings configs
+[@Nito24](https://github.com/Nito24/archconfig)
