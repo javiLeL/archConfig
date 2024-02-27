@@ -248,6 +248,7 @@ screens = [
                     discharge_char='󰂌',
                     full_char='󰁹',
                     unknown_char='󰂑',
+                    not_charging_char='󰁹',
                     format='{char}  {percent:2.0%} {hour:d}:{min:02d}',
                     mouse_callbacks = {'Button3': lambda: qtile.cmd_spawn('alacritty -e sudo nvim /etc/tlp.conf')},
                     **powerline
