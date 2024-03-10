@@ -1,0 +1,20 @@
+[package]
+name = "logind-zbus"
+version = "3.1.2"
+license = "MPL-2.0"
+authors = ["Luke D Jones <luke@ljones.dev>"]
+edition = "2021"
+readme = "README.md"
+repository = "https://gitlab.com/flukejones/logind-zbus"
+homepage = "https://gitlab.com/flukejones/logind-zbus"
+documentation = "https://docs.rs/logind-zbus"
+description = "A dbus client (using zbus) for logind"
+keywords = ["systemd", "logind", "zbus"]
+categories = ["os::unix-apis"]
+
+[dependencies]
+serde = "1.0"
+zbus = "~3.14.0"
+
+[dev-dependencies]
+futures-lite = "1.12.0"

@@ -1,0 +1,49 @@
+image: rust:latest
+
+cache:
+  key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+  paths:
+      # Don't include `incremental` to save space
+      # Debug
+      - target/debug/build/
+      - target/debug/deps/
+      - target/debug/.fingerprint/
+      - target/debug/.cargo-lock
+      - target/debug/df_storyteller
+      # Release
+      - target/release/build/
+      - target/release/deps/
+      - target/release/.fingerprint/
+      - target/release/.cargo-lock
+      # Other tools
+      - ~/.cargo/bin
+      - ./target/deny
+      - ./target/cranky
+
+stages:
+  - test
+
+test:
+  except:
+    - tags
+  script:
+    - echo "nightly" > rust-toolchain
+    - rustup component add rustfmt
+    - cargo fmt --check
+    - rustup component add clippy
+    - cargo check
+    # TODO: make image with these inside
+    - CARGO_TARGET_DIR=./target/deny cargo install cargo-deny
+    - cargo deny check
+    - CARGO_TARGET_DIR=./target/cranky cargo install cargo-cranky
+    - cargo cranky
+
+# Can't test due to systemd
+# test:
+#   except:
+#     - tags
+#   script:
+#     - cargo test
+
+variables:
+  GIT_SUBMODULE_STRATEGY: normal
