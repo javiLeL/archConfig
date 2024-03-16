@@ -109,6 +109,10 @@ keys = [
     Key([mod], "F10", lazy.spawn(homefolder+"/.config/qtile/myScripts/trackpad-toggle"), desc="Toggle the touchpad on/off"),
     Key([], "XF86TouchpadToggle", lazy.spawn(homefolder+"/.config/qtile/myScripts/trackpad-toggle"), desc="Toggle the touchpad"),
     # Key([], "Super_L", lazy.spawn("arandr"), desc="Arandr"),
+
+    # Fan
+    # With notification
+    Key([mod], "F5", lazy.spawn(homefolder+"/.config/qtile/myScripts/fan.sh"), desc="Change Fan"),
 ]
 
 groups = [Group(i) for i in [
@@ -141,7 +145,7 @@ for i, group in enumerate(groups):
     )
 
 layouts = [
-    layout.Columns(border_focus="00a900", border_normal="005000", border_width=3, margin=5),
+    layout.Columns(border_focus="00a900", border_normal="005000", border_width=3, margin=5, border_on_single=True),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),

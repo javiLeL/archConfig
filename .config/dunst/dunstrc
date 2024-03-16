@@ -493,4 +493,8 @@
     appname = "minimalcalendar"
     max_icon_size = 1
     alignment = center
+[stack-fan]
+    appname = "some_fan_notifiers"
+    set_stack_tag = "volume"
+    alignment = center
 # vim: ft=cfg
